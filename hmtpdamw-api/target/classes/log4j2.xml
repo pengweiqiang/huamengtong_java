@@ -50,7 +50,9 @@
         <logger name="org.springframework" level="INFO" additivity="false"></logger>
         <logger name="org.mybatis" level="INFO" additivity="false"></logger>
         <logger name="org.apache" level="INFO" additivity="false"></logger>
-        <logger name="com.google.code.yanf4j" level="INFO" additivity="false"></logger>
+        <logger name="httpclient" level="WARN"/>
+        
+         <logger name="com.google.code.yanf4j" level="INFO" additivity="false"></logger>
         <logger name="net.shopin.jxpdamw.persistence" level="INFO" additivity="false"></logger>
         <logger name="net.rubyeye.xmemcached" level="INFO" additivity="false"></logger>
 
