@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: hmtpdamw-api
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: pengweiqiang
+Implementation-Vendor-Id: net.shopin.hmtpdamw
+Build-Jdk: 1.8.0_40
+Implementation-URL: http://projects.spring.io/spring-boot/jx-parent/hm
+ tpdamw/hmtpdamw-api/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Shopin.
+

@@ -1,0 +1,179 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.shopin.hmtpdamw</groupId>
+    <artifactId>hmtpdamw</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>hmtpdamw-api</artifactId>
+  <packaging>war</packaging>
+  
+  
+  
+  <dependencies>
+		<dependency>
+			<groupId>net.shopin.jiaxing.rest</groupId>
+			<artifactId>jiaxing-rest-framework</artifactId>
+		</dependency>
+		
+		<!-- 引入spring boot框架 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>hibernate-validator</artifactId>
+					<groupId>org.hibernate</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- mybatis start -->
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-httpclient/commons-httpclient -->
+		<dependency>
+		    <groupId>commons-httpclient</groupId>
+		    <artifactId>commons-httpclient</artifactId>
+		    <version>3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- druid 数据连接池 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+		</dependency>
+		<!-- test -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+			<exclusions>
+		    	<exclusion>
+		    		<artifactId>spring-boot-starter-logging</artifactId>
+		    		<groupId>org.springframework.boot</groupId>
+		    	</exclusion>
+	    </exclusions>
+		</dependency>
+		
+		
+		
+		<!-- 对应用系统的自省和监控的集成功能，可以对应用系统进行配置查看、相关功能统计等 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+	    </dependency>
+	    <!-- 
+           devtools可以实现页面热部署（即页面修改后会立即生效，这个可以直接在application.properties文件中配置spring.thymeleaf.cache=false来实现），
+                            实现类文件热部署（类文件修改后不会立即生效），实现对属性文件的热部署。
+                            即devtools会监听classpath下的文件变动，并且会立即重启应用（发生在保存时机），注意：因为其采用的虚拟机机制，该项重启是很快的
+          -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		
+		<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-configuration-processor</artifactId>
+		</dependency>
+		
+		<dependency>
+		  <groupId>com.googlecode.xmemcached</groupId>
+		  <artifactId>xmemcached</artifactId>
+		  <version>1.4.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>net.shopin.hmtpdamw</groupId>
+			<artifactId>hmtpdamw-service</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		
+
+	</dependencies>
+
+	<!-- 开发组约定 配置文件 三套环境 begin -->
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+					<include>**/*.tld</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>profile-active/**</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>${runtime.env}</directory>
+			</resource>
+		</resources>
+		<!-- 自定义war包名称 -->
+		<finalName>hmtpdamw</finalName>
+	</build>
+	<!-- 开发组约定 配置文件 三套环境 end -->
+	<profiles>
+		<profile>
+			<id>local</id>
+			<properties>
+				<runtime.env>src/main/resources/profile-active/local</runtime.env>
+			</properties>
+		</profile>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<runtime.env>src/main/resources/profile-active/dev</runtime.env>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<!-- <activation>
+				<activeByDefault>true</activeByDefault>
+			</activation> -->
+			<properties>
+				<runtime.env>src/main/resources/profile-active/prod</runtime.env>
+			</properties>
+		</profile>
+	</profiles>
+	<!-- <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding> -->
+  
+  
+</project>
