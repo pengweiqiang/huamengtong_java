@@ -28,8 +28,7 @@ public class TestUserApi {
 	
 	@Test
 	public void updatePwd(){
-		String url = "http://localhost:8080/jxpdamw";
-//		String url = "http://192.168.205.132:10004/jxpdamw";
+		String url = "http://localhost:8080/hmtpdamw";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("oldPassword", "0001");
 		map.put("newPassword", "0001");
